@@ -2,7 +2,7 @@ name: build-attested-image
 
 on:
   push:
-    branches: [maindd]
+    branches: [main]
 
 jobs:
   build:
@@ -13,7 +13,7 @@ jobs:
       contents: read
       attestations: write
     env:
-      REGISTRY: ghcr.io
+      REGISTRY: index.docker.io
       IMAGE_NAME: ${{ github.repository }}
 
     steps:
@@ -22,20 +22,20 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: index.docker.io
+          username: nitritesh
+          password: dckr_pat_e3NG2jfs-DkkB7iB47aEurckSYY
       - name: Build and push image
         id: push
         uses: docker/build-push-action@v5.0.0
         with:
           context: .
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+          tags: index.docker.io/ritesh:latest
       - name: Attest
         uses: actions/attest-build-provenance@v1
         id: attest
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          subject-name: index.docker.io/ritesh
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
