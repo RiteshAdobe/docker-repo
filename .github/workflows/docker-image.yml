@@ -14,7 +14,7 @@ jobs:
       attestations: write
     env:
       REGISTRY: index.docker.io
-      IMAGE_NAME: ${{ github.repository }}
+      IMAGE_NAME:  nitritesh/gitactions:wrapper-gitaction
 
     steps:
       - name: Checkout
@@ -22,20 +22,20 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          registry: index.docker.io
+          registry: ${{ env.REGISTRY }}
           username: nitritesh
-          password: dckr_pat_e3NG2jfs-DkkB7iB47aEurckSYY
+          password: dckr_pat_wbv4GP6Fa835zvTKcynkZvWgtCo
       - name: Build and push image
         id: push
         uses: docker/build-push-action@v5.0.0
         with:
           context: .
           push: true
-          tags: index.docker.io/ritesh:latest
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
       - name: Attest
         uses: actions/attest-build-provenance@v1
         id: attest
         with:
-          subject-name: index.docker.io/ritesh
+          subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
