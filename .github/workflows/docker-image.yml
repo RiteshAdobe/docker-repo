@@ -24,7 +24,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: nitritesh
-          password: dckr_pat_wbv4GP6Fa835zvTKcynkZvWgtCo
+          password:  ${{ secrets.DKR_TKN }}
       - name: Build and push image
         id: push
         uses: docker/build-push-action@v5.0.0
