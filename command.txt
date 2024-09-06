@@ -4,6 +4,10 @@ gh attestation verify oci://docker.io/nitritesh/gitactions@sha256:77ea7493eac1ec
 
 gh attestation verify oci://docker.io/nitritesh/gitactions@sha256:77ea7493eac1ec7f40ed7d5fd17872e556087c920ee775c825bdf89b375bcc55 -R RiteshAdobe/docker-repo
 
+docker pull nitritesh/gitactions@sha256:49ce2ba5db67973245e3a1d13b1c36471960b01708572ccf0eebd84f28115761
+
+docker pull nitritesh/gitactions:main
+
 
 
 
